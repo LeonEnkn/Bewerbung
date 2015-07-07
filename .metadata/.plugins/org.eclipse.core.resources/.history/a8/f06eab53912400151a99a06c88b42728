@@ -1,0 +1,6 @@
+package tv.jackifurz.bewerbung;
+
+public class Main extends JavaPlugin
+{
+
+}
