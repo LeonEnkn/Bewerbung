@@ -15,8 +15,8 @@ public class Main extends JavaPlugin
    /**--END--*/
 	
 	
-	@Override
-	public void onEnable()
+   @Override
+   public void onEnable()
    {
 	   _CONSOLE.sendMessage("§4Lobby§fTools §6succesfully §aactivated!");
    }
