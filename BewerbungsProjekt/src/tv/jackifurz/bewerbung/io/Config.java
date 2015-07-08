@@ -7,6 +7,7 @@ import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.World;
 import org.bukkit.configuration.InvalidConfigurationException;
+import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.configuration.file.YamlConfiguration;
 
 import tv.jackifurz.bewerbung.Main;
@@ -14,28 +15,47 @@ import tv.jackifurz.bewerbung.Main;
 public class Config 
 {
     Main plugin;
-	public Config(Main plugin)
+	public File file;
+	public FileConfiguration configfile;
+    public Config(Main plugin)
 	{
 		this.plugin = plugin;
+		file = new File(plugin.getDataFolder(), "config.yml");
+		configfile = YamlConfiguration.loadConfiguration(file);
 	}
-	public File file;
-	public YamlConfiguration configfile = new YamlConfiguration();
+	public File getFile()
+	{
+		return file;
+	}
+	
+ 
+	
 	
 	public void load()
 	{
 
-		if(!new File("config.yml").exists())
-		{
-			file = new File("confi.yml");
-		}
-		
-		try
-        {
+		 if(!file.exists())
+		 {
+			 configfile.options().copyDefaults(true);
+		 }
+		 try
+		 {
 			configfile.load(file);
-			plugin._CONSOLE.sendMessage("§aConfig successfully loaded!");
-		} catch (IOException | InvalidConfigurationException e) 
-		{
-			plugin._CONSOLE.sendMessage("§4Error loading the Config File!");
+		  } catch (IOException | InvalidConfigurationException e) 
+		  {
+			plugin._CONSOLE.sendMessage("§4Failed to load Config!");
+		   }
+		 
+	}
+	
+	public void save()
+	{
+        try 
+        {
+			configfile.save(file);
+		} catch (IOException e) 
+        {
+			plugin._CONSOLE.sendMessage("§4Failed to save Config!");
 		}
 	}
 	

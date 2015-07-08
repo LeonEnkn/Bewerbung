@@ -18,6 +18,9 @@ public class PlayerJoinManager implements Listener
 	   
 	   plugin.online.add(p);
 	   
+	   plugin.getItemManager().initItems();
+	   plugin.getItemManager().giveItems(p);
+	   
 	   /** If the members already have colored prefixes, use this code:*/
 	   e.setJoinMessage("§7>> Der Spieler " + p.getDisplayName() + " §7betritt den Server![§a+]");
 	   

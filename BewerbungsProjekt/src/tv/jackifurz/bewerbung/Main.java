@@ -9,6 +9,7 @@ import org.bukkit.entity.Player;
 import org.bukkit.plugin.PluginManager;
 import org.bukkit.plugin.java.JavaPlugin;
 
+import tv.jackifurz.bewerbung.events.ItemManager;
 import tv.jackifurz.bewerbung.events.PlayerJoinManager;
 import tv.jackifurz.bewerbung.events.PlayerKickManager;
 import tv.jackifurz.bewerbung.events.PlayerQuitManager;
@@ -30,6 +31,7 @@ public class Main extends JavaPlugin
 	public ArrayList<Player> online = new ArrayList<Player>();
 	
 	public PluginManager pm = Bukkit.getPluginManager();
+	public ItemManager im = new ItemManager(this);
 	
 	public Config config = new Config(this);
 	
@@ -39,6 +41,15 @@ public class Main extends JavaPlugin
 	
    /**--END--*/
 	
+   public Config getConfiguration()
+   {
+	   return config;
+   }
+   
+   public ItemManager getItemManager()
+   {
+	   return im;
+   }
 	
    @Override
    public void onEnable()
@@ -46,6 +57,8 @@ public class Main extends JavaPlugin
 	   _CONSOLE.sendMessage("§4Lobby§fTools §6successfully §aactivated!");
 	   registerEvents();
 	   config.load();
+	   config.save();
+	   im.initItems();
    }
    
    @Override
@@ -59,4 +72,10 @@ public class Main extends JavaPlugin
    {
 	   pm.registerEvents(joinlistener, this);
    }
+   
+   public void registerCommands()
+   {
+	   
+   }
+   
 }
